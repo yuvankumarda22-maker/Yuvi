@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Little Table Tennis? 🏓</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&display=swap">
+<style>
+:root{--bg1:#fff0f6;--bg2:#ffc2dc;--bg3:#ff8fbd;--card:rgba(255,255,255,.93);--hot:#ff2f7d;--deep:#c2185b;--ink:#5a1740;--soft:#ffe3ee;--line:#ffb3d1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#3a0f26;--bg2:#5c1640;--bg3:#8a1f5c;--card:rgba(58,15,38,.93);--hot:#ff5c9e;--deep:#ff9cc6;--ink:#ffe3ef;--soft:#511434;--line:#8a2a5e}}
+:root[data-theme="dark"]{--bg1:#3a0f26;--bg2:#5c1640;--bg3:#8a1f5c;--card:rgba(58,15,38,.93);--hot:#ff5c9e;--deep:#ff9cc6;--ink:#ffe3ef;--soft:#511434;--line:#8a2a5e}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px 16px;background:radial-gradient(circle at 20% 0,var(--bg1) 0,var(--bg2) 50%,var(--bg3) 100%) fixed;background-color:var(--bg2);font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bg span{position:absolute;bottom:-40px;animation:float linear infinite;opacity:.55}
+@keyframes float{to{transform:translateY(-115vh) rotate(40deg)}}
+.card{position:relative;width:min(100%,440px);background:var(--card);border:3px dashed var(--hot);border-radius:30px;padding:28px 22px;text-align:center;box-shadow:0 20px 60px #ff2f7d44;z-index:1}
+.tag{display:inline-block;background:var(--hot);color:#fff;font-weight:700;font-size:12px;letter-spacing:2px;padding:6px 14px;border-radius:99px}
+.ball{font-size:62px;margin:10px 0 0;display:inline-block;animation:pong 1.6s ease-in-out infinite}
+@keyframes pong{0%,100%{transform:translateX(-55px) rotate(-20deg)}50%{transform:translateX(55px) rotate(20deg)}}
+h1{font-family:Pacifico,cursive;font-weight:400;font-size:clamp(28px,8.5vw,38px);line-height:1.25;margin:8px 0 12px;color:var(--hot)}
+p{font-size:17px;line-height:1.5;margin:10px 0}
+.loc{display:inline-block;background:var(--soft);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font-weight:600}
+.stamp{margin:16px 0;background:var(--soft);border-radius:20px;padding:14px;text-align:left;font-size:14.5px;line-height:1.6;border:2px solid var(--line)}
+.stamp b{color:var(--deep)}
+.stamp div{margin:4px 0}
+.arena{min-height:120px;margin-top:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+button{font-family:inherit;border:0;border-radius:99px;padding:13px 22px;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s}
+.yes{background:linear-gradient(135deg,#ff2f7d,#ff7fb0);color:#fff;box-shadow:0 8px 22px #ff2f7d66;animation:wiggle 2s ease-in-out infinite}
+@keyframes wiggle{0%,100%{rotate:0deg}25%{rotate:-2deg}75%{rotate:2deg}}
+.maybe{background:var(--soft);color:var(--deep);border:2px solid var(--line);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+#reply{min-height:44px;margin-top:10px;color:var(--deep);font-weight:600;line-height:1.5}
+#picker{display:none;text-align:left;margin-top:8px}
+#picker h3{margin:14px 0 8px;font-size:15px;color:var(--deep)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--soft);color:var(--ink);border:2px solid var(--line);padding:9px 14px;font-size:14.5px;font-weight:600}
+.chip.on{background:var(--hot);border-color:var(--hot);color:#fff;transform:scale(1.05)}
+.send{display:block;width:100%;margin-top:18px;background:linear-gradient(135deg,#ff2f7d,#ff7fb0);color:#fff;box-shadow:0 8px 22px #ff2f7d55}
+#out{width:100%;margin-top:10px;border:2px solid var(--line);border-radius:16px;background:var(--soft);color:var(--ink);font:inherit;font-size:14.5px;padding:10px;resize:none;display:none}
+.small{font-size:12px;opacity:.75;margin-top:14px;text-align:center}
+.pop{position:fixed;pointer-events:none;z-index:9;animation:burst 1.6s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<main class="card">
+  <span class="tag">A QUICK QUESTION 💌</span><br>
+  <div class="ball">🏓</div>
+  <h1>Table tennis, you and me?</h1>
+  <p>Let’s play a friendly game at <span class="loc">CEG Square 📍</span></p>
+  <p>You said you don’t know anything about table tennis. Perfect. That makes two of us pretending I’m good at it. 😂</p>
+
+  <div class="stamp">
+    <div>📜 <b>Very official terms</b></div>
+    <div>🏓 Zero experience needed. I’ll teach you the basics.</div>
+    <div>👀 You watch, then give your judgement. Be kind.</div>
+    <div>🍟 Snacks after. Winner chooses. Negotiable.</div>
+    <div>😄 Laughing at missed shots is fully allowed.</div>
+  </div>
+
+  <div class="stamp">
+    <div>⭐ <b>My first choice: 30 November, evening</b></div>
+    <div>I have my exam on 30 November in the afternoon, so I’ll be there that day. It would be great if we could play in the evening. 🏓💗</div>
+  </div>
+
+  <p><b>Can we find a day that works for both of us? 🥺👉👈</b></p>
+  <div class="arena" id="arena">
+    <button class="yes" id="yes" onclick="sayYes()">Yes, let’s pick a day! 💗</button>
+    <button class="maybe" id="maybe">Hmm, let me think 🤔</button>
+  </div>
+  <div id="reply" aria-live="polite"></div>
+
+  <section id="picker">
+    <h3>📅 Which dates work for you?</h3>
+    <div class="chips" id="days"></div>
+    <h3>⏰ What time of day?</h3>
+    <div class="chips" id="times"></div>
+    <button class="send" onclick="build()">Send my answer 💌</button>
+    <textarea id="out" rows="3" readonly></textarea>
+    <div id="thanks" aria-live="polite" style="margin-top:10px;color:var(--deep);font-weight:600;line-height:1.5;text-align:center"></div>
+  </section>
+  <div class="small">P.S. Any date is fine, no pressure at all. 😊</div>
+</main>
+<script>
+(function(){var bg=document.getElementById('bg'),e=['💗','🏓','💕','✨','🌸','💖'];for(var i=0;i<18;i++){var s=document.createElement('span');s.textContent=e[i%e.length];s.style.left=Math.random()*100+'vw';s.style.fontSize=(16+Math.random()*24)+'px';s.style.animationDuration=(9+Math.random()*10)+'s';s.style.animationDelay=(-Math.random()*14)+'s';bg.appendChild(s)}})();
+
+var dodges=0,done=false,yes=document.getElementById('yes'),maybe=document.getElementById('maybe'),reply=document.getElementById('reply');
+var lines=["Too slow! 😜","The button has a mind of its own 😂","Look how big that yes button is getting… 👀","Okay, last one 😳"];
+function dodge(e){
+  if(done)return;
+  if(dodges>=4){maybe.textContent='Okay fine… YES 😳💗';maybe.style.transform='none';return}
+  if(e&&e.cancelable)e.preventDefault();
+  dodges++;
+  maybe.style.transform='translate('+((Math.random()-.5)*160)+'px,'+((Math.random()-.5)*80)+'px) rotate('+((Math.random()-.5)*40)+'deg)';
+  yes.style.fontSize=(16+dodges*2.5)+'px';
+  reply.textContent=lines[dodges-1];
+}
+maybe.addEventListener('mouseenter',dodge);
+maybe.addEventListener('touchstart',dodge,{passive:false});
+maybe.addEventListener('click',function(){if(dodges>=4)sayYes();else dodge()});
+
+var D=['30 Nov (Mon)','1 Dec (Tue)','2 Dec (Wed)','3 Dec (Thu)','4 Dec (Fri)','5 Dec (Sat)','6 Dec (Sun)','7 Dec (Mon)','8 Dec (Tue)','9 Dec (Wed)','10 Dec (Thu)','11 Dec (Fri)','12 Dec (Sat)','13 Dec (Sun)'],T=['Morning ☀️','Afternoon 🌤️','Evening 🌙','Anytime 😎'];
+function chips(id,arr){var c=document.getElementById(id);arr.forEach(function(x){var b=document.createElement('button');b.className='chip';b.textContent=x;b.onclick=function(){b.classList.toggle('on')};c.appendChild(b)})}
+chips('days',D);chips('times',T);
+
+function sayYes(){
+  if(done)return;done=true;
+  document.getElementById('arena').style.display='none';
+  reply.innerHTML='Yay! 🎉 Now just pick the dates that work for you.';
+  document.getElementById('picker').style.display='block';
+  var em=['💗','🏓','💕','✨','🎉','💖'];
+  for(var i=0;i<34;i++){(function(i){var s=document.createElement('span');s.className='pop';s.textContent=em[i%em.length];s.style.left='50vw';s.style.top='45vh';s.style.fontSize=(18+Math.random()*26)+'px';s.style.setProperty('--x',((Math.random()-.5)*110)+'vw');s.style.setProperty('--y',(-10-Math.random()*60)+'vh');s.style.setProperty('--r',((Math.random()-.5)*720)+'deg');document.body.appendChild(s);setTimeout(function(){s.remove()},1700)})(i)}
+}
+function sel(id){return Array.prototype.map.call(document.querySelectorAll('#'+id+' .on'),function(b){return b.textContent})}
+function build(){
+  var d=sel('days'),t=sel('times'),out=document.getElementById('out');
+  if(!d.length){var th=document.getElementById('thanks');th.textContent='Pick at least one date first 🙂';return}
+  var msg='Hi! 🏓 I’m free for table tennis on '+d.join(', ')+(t.length?' ('+t.join(', ').replace(/[^\w ,()]/g,'').replace(/\s+/g,' ').trim()+')':'')+'. Which day works for you?';
+  out.value=msg;out.style.display='block';out.select();
+  var th2=document.getElementById('thanks');th2.textContent='Thank you! 💌 Please send me this message in chat, so I see it for sure.';th2.scrollIntoView({behavior:'smooth',block:'center'});
+  try{if(navigator.share){navigator.share({text:msg}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(msg)}}catch(e){}
+}
+</script>
+</body>
+</html>
